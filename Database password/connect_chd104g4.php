@@ -1,4 +1,3 @@
-<!-- 緯育資料庫帳號密碼 -->
 <?php
     $dbname = "tibamefe_chd104g4"; //資料庫名稱
     $user = "tibamefe_since2021"; //帳號

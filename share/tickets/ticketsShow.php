@@ -1,6 +1,5 @@
 <?php
-//允許跨域存取
-header("Access-Control-Allow-Origin: *"); // 允許所有來源
+header("Access-Control-Allow-Origin: *"); //允許跨域存取
 header("Content-Type: application/json; charset=UTF-8");
 
 try {

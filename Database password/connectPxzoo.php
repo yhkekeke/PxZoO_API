@@ -1,4 +1,3 @@
-<!-- 本地端帳號密碼 -->
 <?php
     $dbname = "pxzoo";   // 資料庫名稱改為 pxzoo
     $user = "root";
