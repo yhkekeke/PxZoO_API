@@ -10,7 +10,7 @@ try {
         require_once("../pxzoo/connectPxzoo.php");
     } else {
         // 生產環境
-        require_once("https://tibamef2e.com/chd104/g4/api/connectPxzoo.php");
+        require_once("https://tibamef2e.com/chd104/g4/api/connect_chd104g4.php");
     }
 
     // SQL 查詢
