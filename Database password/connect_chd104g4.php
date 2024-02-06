@@ -1,8 +1,8 @@
-
+<!-- 緯育資料庫帳號密碼 -->
 <?php
-    $dbname = "pxzoo";   // 資料庫名稱改為 pxzoo
-    $user = "root";
-    $password = "";
+    $dbname = "tibamefe_chd104g4"; //資料庫名稱
+    $user = "tibamefe_since2021"; //帳號
+    $password = "vwRBSb.j&K#E"; //密碼
     $port = 3306;
 
     $dsn = "mysql:host=localhost;port={$port};dbname=$dbname;charset=utf8";
