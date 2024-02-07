@@ -1,4 +1,6 @@
 <?php
+
+ini_set("display_errors", "On");//php偵錯
 try {
     // 連線 MySQL
     if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
@@ -8,7 +10,7 @@ try {
         header("Content-Type: application/json; charset=UTF-8");
     } else {
         // 生產環境
-        require_once("https://tibamef2e.com/chd104/g4/api/connect_chd104g4.php");
+        require_once("connect_chd104g4.php");
     }
 
     // SQL 查詢
