@@ -1,12 +1,11 @@
 <?php
-header("Access-Control-Allow-Origin: *"); //允許跨域存取
-header("Content-Type: application/json; charset=UTF-8");
-
 try {
     // 連線 MySQL
     if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
         // 開發環境
         require_once("../pxzoo/connectPxzoo.php");
+        header("Access-Control-Allow-Origin: *"); //允許跨域存取
+        header("Content-Type: application/json; charset=UTF-8");
     } else {
         // 生產環境
         require_once("https://tibamef2e.com/chd104/g4/api/connect_chd104g4.php");
