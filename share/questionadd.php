@@ -12,9 +12,9 @@ require_once("../pxzoo/connectPxzoo.php");
 // $dsn = "mysql:host=localhost;port={$port};dbname=$dbname;charset=utf8";
 
 // 建立 PDO 物件
-$conn = new PDO($dsn, $user, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$conn->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
+$pdo = new PDO($dsn, $user, $password, $options);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
 
 // 檢查是否有提交表單
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
