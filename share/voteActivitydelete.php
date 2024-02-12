@@ -3,7 +3,6 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS,DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Origin:*");
 require_once("../pxzoo/connectPxzoo.php");
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -20,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
         $questionId = $data->id;
 
         // 使用 PDO 或其他適當的資料庫操作庫執行刪除操作
-        $stmt = $pdo->prepare("DELETE FROM questions WHERE question_id = ?");
+        $stmt = $pdo->prepare("DELETE FROM vote_activity WHERE vote_activity_id = ?");
         $stmt->execute([$questionId]);
 
         // 檢查是否刪除成功
