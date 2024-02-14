@@ -4,11 +4,17 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 require_once("../pxzoo/connectPxzoo.php");
+// $dbname = "pxzoo";   // 資料庫名稱改為 pxzoo
+// $user = "root";
+// $password = "";
+// $port = 3306;
+
+// $dsn = "mysql:host=localhost;port={$port};dbname=$dbname;charset=utf8";
 
 // 建立 PDO 物件
-$conn = new PDO($dsn, $user, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$conn->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
+$pdo = new PDO($dsn, $user, $password, $options);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
 
 // 檢查是否有提交表單
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -36,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
     // 預備語句
-    $stmt = $conn->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     // 綁定參數
     $stmt->bindParam(1, $question_text);
     $stmt->bindParam(2, $question_option_a);
@@ -60,4 +66,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->closeCursor();
 }
 
-$conn = null; // 關閉資料庫連接
+$pdo = null; // 關閉資料庫連接
