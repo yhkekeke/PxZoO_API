@@ -22,7 +22,7 @@
             $questionsData = $questions->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($questionsData);
         } else {
-            echo json_encode(["errMsg" => "沒有找到票務資料"]);
+            echo json_encode(["errMsg" => "沒有找到題目資料"]);
         }
     } catch (PDOException $e) {
         echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
