@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $news_text_4 = $_POST["news_text_4"] ?? '';
 
     // 將上傳的圖片移動到指定的資料夾中
-    move_uploaded_file($_FILES["news_typepic"]["tmp_name"], "image/news/" . $_FILES["news_typepic"]["name"]);
+    move_uploaded_file($_FILES["news_typepic"]["tmp_name"], "image/news/newsFrame/" . $_FILES["news_typepic"]["name"]);
     move_uploaded_file($_FILES["news_pic"]["tmp_name"], "image/news/" . $_FILES["news_pic"]["name"]);
 
     // SQL 插入語句
