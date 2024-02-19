@@ -15,8 +15,7 @@ try{
     }
 
     // SQL 修改指令
-
-    $alterOrderSQL = 'UPDATE orders SET sta_id=:sta_id, ord_status=:ord_status, ord_altertime=now() WHERE ord_id=:ord_id;';
+    $alterOrderSQL = 'UPDATE orders SET sta_id=:sta_id, ord_status=:ord_status, ord_altertime=now() WHERE ord_id=:ord_id;' ;
 
     // 準備 SQL 查詢
     $alterOrderStatement = $pdo->prepare($alterOrderSQL);
