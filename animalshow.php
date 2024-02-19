@@ -5,7 +5,7 @@ try {
     if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
         // 開發環境
         //這是本地端的mySQL資料庫帳號密碼檔案
-        require_once("../pxzoo/connectPxzoo.php");
+        require_once("connectPxzoo.php");
             //允許跨域存取
         header("Access-Control-Allow-Origin: *"); // 允許所有來源
         header("Content-Type: application/json; charset=UTF-8");

@@ -4,7 +4,7 @@ try {
 if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
     // 開發環境
     //這是本地端的mySQL資料庫帳號密碼檔案
-    require_once("../pxzoo/connectPxzoo.php");
+    require_once("connectPxzoo.php");
         //允許跨域存取
     header("Access-Control-Allow-Origin: *"); // 允許所有來源
     header("Content-Type: application/json; charset=UTF-8");
@@ -41,19 +41,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // 將上傳的圖片移動到指定的資料夾中
-    move_uploaded_file($_FILES["animal_pic_a"]["tmp_name"], "images/animal/animal_pic/" . $_FILES["animal_pic_a"]["name"]);
+    move_uploaded_file($_FILES["animal_pic_a"]["tmp_name"], "../images/animal/animal_pic/" . $_FILES["animal_pic_a"]["name"]);
     if(isset($_FILES['animal_pic_b']) && !empty($_FILES['animal_pic_b'])) {
         // 處理 animal_pic_b 的上傳圖片
-        move_uploaded_file($_FILES["animal_pic_b"]["tmp_name"], "images/animal/animal_pic/" . $_FILES["animal_pic_b"]["name"]);
+        move_uploaded_file($_FILES["animal_pic_b"]["tmp_name"], "../images/animal/animal_pic/" . $_FILES["animal_pic_b"]["name"]);
     }
     if(isset($_FILES['animal_pic_c']) && !empty($_FILES['animal_pic_c'])) {
         // 處理 animal_pic_c 的上傳圖片
-        move_uploaded_file($_FILES["animal_pic_c"]["tmp_name"], "images/animal/animal_pic/" . $_FILES["animal_pic_c"]["name"]);
+        move_uploaded_file($_FILES["animal_pic_c"]["tmp_name"], "../images/animal/animal_pic/" . $_FILES["animal_pic_c"]["name"]);
     }
 
-    move_uploaded_file($_FILES["animal_icon"]["tmp_name"], "images/animal/animal_icon/" . $_FILES["animal_icon"]["name"]);
-    move_uploaded_file($_FILES["animal_small_pic"]["tmp_name"], "images/animal/small_pic/" . $_FILES["animal_small_pic"]["name"]);
-    move_uploaded_file($_FILES["animal_sound"]["tmp_name"], "images/animal/audio/" . $_FILES["animal_sound"]["name"]);
+    move_uploaded_file($_FILES["animal_icon"]["tmp_name"], "../images/animal/animal_icon/" . $_FILES["animal_icon"]["name"]);
+    move_uploaded_file($_FILES["animal_small_pic"]["tmp_name"], "../images/animal/small_pic/" . $_FILES["animal_small_pic"]["name"]);
+    move_uploaded_file($_FILES["animal_sound"]["tmp_name"], "../images/animal/audio/" . $_FILES["animal_sound"]["name"]);
 
 
 

@@ -7,7 +7,8 @@
         if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
             // 開發環境
             //這是本地端的mySQL資料庫帳號密碼檔案
-            require_once("../pxzoo/connectPxzoo.php");
+            require_once("connectPxzoo.php");
+
                 //允許跨域存取
             header("Access-Control-Allow-Origin: *"); // 允許所有來源
             header("Access-Control-Allow-Methods: POST, GET, OPTIONS,DELETE");
@@ -19,7 +20,7 @@
             require_once("connect_chd104g4.php");
         }
 
-        $searchTerm = $_GET['searchTerm'];//有問題
+        $searchTerm = $_GET['searchTerm'];
         // SQL 查詢，模糊查詢
         $sql = "SELECT a.*, l.category_name
         FROM animal a JOIN location l ON a.location_name = l.location_name 
