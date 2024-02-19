@@ -4,7 +4,7 @@ ini_set("display_errors", "On"); // PHP偵錯
 try {
     if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
         // 開發環境
-        require_once('../pxzoo/connectPxzoo.php');
+        require_once('connectPxzoo.php');
         header('Access-Control-Allow-Origin: *'); // 允許跨域存取，* 表示允許所有網域的前端頁面
         header("Content-Type: application/json; charset=UTF-8"); // 回傳給前端的資料類型及字元編碼
     }else{

@@ -4,7 +4,7 @@ ini_set("display_errors", "On"); // PHP偵錯
 try {
     if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
         // 開發環境
-        require_once('../pxzoo/connectPxzoo.php');
+        require_once('connectPxzoo.php');
         header('Access-Control-Allow-Origin: *'); // 允許跨域存取，* 表示允許所有網域的前端頁面
         header("Content-Type: application/json; charset=UTF-8"); // 回傳給前端的資料類型及字元編碼
     }else{
@@ -12,14 +12,19 @@ try {
         require_once('connect_chd104g4.php');
     }
 
+    // 判斷是否有搜尋條件
+    $searchTerm = isset($_GET['searchTerm']) ? "%".$_GET['searchTerm']."%" : '%';
+
     // SQL 查詢
     $ordersSQL = 'SELECT o.* , m.mem_name, m.mem_title, SUM(od.ord_detail_qty) AS allqty, 
-    od.ord_detail_qty , c.cou_name , s.sta_pos FROM orders o JOIN member m ON o.mem_id = m.mem_id JOIN orders_detail od ON o.ord_id = od.ord_id LEFT JOIN coupon_detail cd ON od.ord_id = cd.ord_id LEFT JOIN coupon c ON cd.cou_id = c.cou_id LEFT JOIN staff s ON o.sta_id = s.sta_id GROUP BY o.ord_id;';
+    od.ord_detail_qty , c.cou_name , s.sta_pos FROM orders o JOIN member m ON o.mem_id = m.mem_id JOIN orders_detail od ON o.ord_id = od.ord_id LEFT JOIN coupon_detail cd ON od.ord_id = cd.ord_id LEFT JOIN coupon c ON cd.cou_id = c.cou_id LEFT JOIN staff s ON o.sta_id = s.sta_id WHERE o.ord_id LIKE :searchTerm OR m.mem_name LIKE :searchTerm 
+    GROUP BY o.ord_id;';
 
     // 準備 SQL 查詢
     $ordersStatement = $pdo->prepare($ordersSQL);
         // 1. $pdo: PDO 實例，它代表了與資料庫的連線
         // 2. 會返回一個 PDOStatement 物件，其中包含了已經準備好的 SQL 查詢。
+    $ordersStatement->bindValue(':searchTerm', $searchTerm, PDO::PARAM_STR);
 
     // 執行 SQL: 使用 PDO（PHP Data Objects）中的 execute 方法，執行之前準備好的 SQL 查詢
     $ordersStatement->execute();
