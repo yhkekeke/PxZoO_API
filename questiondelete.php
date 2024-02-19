@@ -5,8 +5,8 @@ header("Access-Control-Allow-Origin: *");
 // 允許方法使用
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS,DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Origin: http://localhost:5174");
-require_once("../pxzoo/connectPxzoo.php");
+require_once("../../g4/api/connectPxzoo.php");
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;

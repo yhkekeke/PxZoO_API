@@ -6,7 +6,7 @@
     header("Content-Type: application/json; charset=UTF-8");
 
     try {
-        require_once("../pxzoo/connectPxzoo.php");
+        require_once("../../g4/api/connectPxzoo.php");
 
         // SQL 查詢
         $sql = "SELECT * FROM votes";  // 修改為您的 SQL 查詢

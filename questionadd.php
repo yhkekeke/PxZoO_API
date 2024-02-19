@@ -3,7 +3,8 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-require_once("../pxzoo/connectPxzoo.php");
+require_once("../../g4/api/connectPxzoo.php");
+
 // $dbname = "pxzoo";   // 資料庫名稱改為 pxzoo
 // $user = "root";
 // $password = "";
@@ -32,10 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $question_answer_illustrate = $_POST["question_answer_illustrate"] ?? '';
 
     // 將上傳的圖片移動到指定的資料夾中
-    move_uploaded_file($_FILES["question_img_a"]["tmp_name"], "image/" . $_FILES["question_img_a"]["name"]);
-    move_uploaded_file($_FILES["question_img_b"]["tmp_name"], "image/" . $_FILES["question_img_b"]["name"]);
-    move_uploaded_file($_FILES["question_img_c"]["tmp_name"], "image/" . $_FILES["question_img_c"]["name"]);
-    move_uploaded_file($_FILES["question_img_d"]["tmp_name"], "image/" . $_FILES["question_img_d"]["name"]);
+    move_uploaded_file($_FILES["question_img_a"]["tmp_name"], "../images/school/animal/" . $_FILES["question_img_a"]["name"]);
+    move_uploaded_file($_FILES["question_img_b"]["tmp_name"], "../images/school/animal/" . $_FILES["question_img_b"]["name"]);
+    move_uploaded_file($_FILES["question_img_c"]["tmp_name"], "../images/school/animal/" . $_FILES["question_img_c"]["name"]);
+    move_uploaded_file($_FILES["question_img_d"]["tmp_name"], "../images/school/animal/" . $_FILES["question_img_d"]["name"]);
+
 
     // SQL 插入語句
     $sql = "INSERT INTO questions (question_text, question_option_a, question_img_a, question_option_b, question_img_b, question_option_c, question_img_c, question_option_d, question_img_d, question_correctanswer, question_answer_illustrate, question_status) 

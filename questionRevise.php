@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    require_once("../pxzoo/connectPxzoo.php");
+    require_once("connectPxzoo.php");
 
     // 从 HTTP 请求中获取 JSON 格式的输入数据
     $inputJSON = file_get_contents('php://input');
@@ -37,24 +37,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $new_question_img_d = $_FILES['new_question_img_d']["name"] ?? '';
 
     // 目標路徑
-    $target_directory = '../pxzoo/image/';
+    $target_directory = '/images/school/animal/';
 
-    // 更新圖片 URL 並移動檔案
+    // 檢查目標路徑是否存在，不存在則創建
+    if (!file_exists($target_directory)) {
+        mkdir($target_directory, 0777, true);
+    }
+
+    // 更新圖片 URL 並复制文件
     if (!empty($new_question_img_a)) {
-        $question_img_a = $target_directory . basename($_FILES["new_question_img_a"]["name"]);
-        move_uploaded_file($_FILES["new_question_img_a"]["tmp_name"], $question_img_a);
-    }
-    if (!empty($new_question_img_b)) {
-        $question_img_b = $target_directory . basename($_FILES["new_question_img_b"]["name"]);
-        move_uploaded_file($_FILES["new_question_img_b"]["tmp_name"], $question_img_b);
-    }
-    if (!empty($new_question_img_c)) {
-        $question_img_c = $target_directory . basename($_FILES["new_question_img_c"]["name"]);
-        move_uploaded_file($_FILES["new_question_img_c"]["tmp_name"], $question_img_c);
-    }
-    if (!empty($new_question_img_d)) {
-        $question_img_d = $target_directory . basename($_FILES["new_question_img_d"]["name"]);
-        move_uploaded_file($_FILES["new_question_img_d"]["tmp_name"], $question_img_d);
+        $question_img_a = $target_directory . '/' . basename($_FILES["new_question_img_a"]["name"]);
+        if (!copy($_FILES["new_question_img_a"]["tmp_name"], $question_img_a)) {
+            echo json_encode(["errMsg" => "無法將 new_question_img_a 檔案複製到目標資料夾"]);
+            exit;
+        }
     }
 
     try {

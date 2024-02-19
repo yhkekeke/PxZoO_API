@@ -10,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    require_once("../pxzoo/connectPxzoo.php");
+    require_once("../../g4/api/connectPxzoo.php");
+
 
     // 从 HTTP 请求中获取 JSON 格式的输入数据
     $inputJSON = file_get_contents('php://input');
