@@ -1,8 +1,7 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Credentials: true"); // 添加這行來支持帶有身份驗證信息的請求
 
 // 確保任何來自 OPTIONS 方法的請求都會被接受
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -32,15 +31,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     // 新的圖片 URL，如果有的話
-    $new_news_typepic = $input['new_news_typepic'];
-    $new_news_pic = $input['new_news_pic'];
+    $new_news_typepic = $_FILES['new_news_typepic']["name"] ?? '';
+    $new_news_pic = $_FILES['new_news_pic']["name"] ?? '';
 
-    // 更新圖片 URL
+    // 目標路徑
+    $target_directory = '../pxzoo/';
+
+    // 更新圖片 URL 並移動檔案
     if (!empty($new_news_typepic)) {
-        $news_typepic = $new_news_typepic;
+        $news_typepic = $target_directory . basename($_FILES["new_news_typepic"]["name"]);
+        move_uploaded_file($_FILES["new_news_typepic"]["tmp_name"], $news_typepic);
     }
     if (!empty($new_news_pic)) {
-        $news_pic = $new_news_pic;
+        $news_pic = $target_directory . basename($_FILES["new_news_pic"]["name"]);
+        move_uploaded_file($_FILES["new_news_pic"]["tmp_name"], $news_pic);
     }
 
     // 準備 SQL 更新語句，請根據您的數據庫實際情況進行調整
