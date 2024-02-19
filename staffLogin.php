@@ -7,10 +7,10 @@ header("Content-Type: application/json; charset=UTF-8");
 
 if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
     // 開發環境
-    require_once("../pxzoo/connectPxzoo.php");
+    require_once("connectPxzoo.php");
 } else {
     // 生產環境
-    require_once("https://tibamef2e.com/chd104/g4/api/connectPxzoo.php");
+    require_once("connect_chd104g4.php");
 }
 
 session_start();

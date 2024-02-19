@@ -3,7 +3,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-require_once("../../g4/api/connectPxzoo.php");
+require_once("connectPxzoo.php");
 
 
 // 建立 PDO 物件

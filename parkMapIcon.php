@@ -9,7 +9,7 @@ try {
         header("Content-Type: application/json; charset=UTF-8");//設定回傳的資料類型和編碼
 
         // 如果是在開發環境
-        require_once("../pxzoo/connectPxzoo.php");
+        require_once("connectPxzoo.php");
 
     } else {
 

@@ -6,7 +6,7 @@
     header("Content-Type: application/json; charset=UTF-8");
 
     try {
-        require_once("../../g4/api/connectPxzoo.php");
+        require_once("connectPxzoo.php");
 
 
         // SQL 查詢
