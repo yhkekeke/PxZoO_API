@@ -15,18 +15,21 @@ try{
     }
 
     // SQL 修改指令
-    $alterOrderSQL = 'UPDATE orders SET sta_id=:sta_id, ord_status=:ord_status, ord_altertime=now() WHERE ord_id=:ord_id;' ;
+    $updateOrderSQL = 'UPDATE orders SET sta_id=:sta_id, ord_status=:ord_status, ord_altertime=now() WHERE ord_id=:ord_id;' ;
 
     // 準備 SQL 查詢
-    $alterOrderStatement = $pdo->prepare($alterOrderSQL);
+    $updateOrderStatement = $pdo->prepare($updateOrderSQL);
 
     // 解析 JSON 請求數據
+    // PHP 的 file_get_contents 函數用於讀取文件的內容
+    // 參數 "php://input" 是用於讀取請求主體的URL，特別是對於 POST 請求
+    // json_decode 函數用於將 JSON 字符串轉換為 PHP 關聯數組（如果第二個參數為 true）或對象（如果第二個參數為 false或省略）
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $alterOrderStatement->bindValue(":sta_id", $data['sta_id']);
-    $alterOrderStatement->bindValue(":ord_status", $data['ord_status']);
-    $alterOrderStatement->bindValue(':ord_id', $data['ord_id']);
-    $alterOrderStatement->execute();
+    $updateOrderStatement->bindValue(":sta_id", $data['sta_id']);
+    $updateOrderStatement->bindValue(":ord_status", $data['ord_status']);
+    $updateOrderStatement->bindValue(':ord_id', $data['ord_id']);
+    $updateOrderStatement->execute();
 
     // 記錄成功的 log
     error_log('Order altered successfully');
