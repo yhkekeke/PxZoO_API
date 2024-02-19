@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    require_once("../pxzoo/connectPxzoo.php");
+    require_once("connectPxzoo.php");
 
     // 從 HTTP 請求中獲取 JSON 格式的輸入數據
     $inputJSON = file_get_contents('php://input');
@@ -31,20 +31,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     // 新的圖片 URL，如果有的話
-    $new_news_typepic = $_FILES['new_news_typepic']["name"] ?? '';
-    $new_news_pic = $_FILES['new_news_pic']["name"] ?? '';
+    $new_news_typepic = $_FILES['news_typepic']["name"] ?? '';
+    $new_news_pic = $_FILES['news_pic']["name"] ?? '';
 
     // 目標路徑
-    $target_directory = '../pxzoo/';
+    $target_directory = '../images/news/';
 
     // 更新圖片 URL 並移動檔案
     if (!empty($new_news_typepic)) {
         $news_typepic = $target_directory . basename($_FILES["new_news_typepic"]["name"]);
-        move_uploaded_file($_FILES["new_news_typepic"]["tmp_name"], $news_typepic);
+        move_uploaded_file($_FILES["news_typepic"]["tmp_name"], $news_typepic);
     }
     if (!empty($new_news_pic)) {
         $news_pic = $target_directory . basename($_FILES["new_news_pic"]["name"]);
-        move_uploaded_file($_FILES["new_news_pic"]["tmp_name"], $news_pic);
+        move_uploaded_file($_FILES["news_pic"]["tmp_name"], $news_pic);
     }
 
     // 準備 SQL 更新語句，請根據您的數據庫實際情況進行調整

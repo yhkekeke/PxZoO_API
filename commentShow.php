@@ -1,18 +1,19 @@
 <?php
-//允許跨域存取
-header("Access-Control-Allow-Origin: *"); // 允許所有來源
-header("Content-Type: application/json; charset=UTF-8");
-
 try {
-    // 連線 MySQL
-    // if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-    //     // 開發環境
-    //     require_once("../pxzoo/connectPxzoo.php");
-    // } else {
-    //     // 生產環境
-    //     require_once("https://tibamef2e.com/chd104/g4/api/connectPxzoo.php");
-    // }
-    require_once("../pxzoo/connectPxzoo.php");
+    //下面這個if則是我設定好讓它在開發時，會自動判斷我們是在開發環境還是在網站上線
+    if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
+        // 開發環境
+        //這是本地端的mySQL資料庫帳號密碼檔案
+        require_once("connectPxzoo.php");
+            //允許跨域存取
+        header("Access-Control-Allow-Origin: *"); // 允許所有來源
+        header("Content-Type: application/json; charset=UTF-8");
+    } else {
+        // 生產環境  
+        //這裡則是我們網站上線後要偵測緯育資料庫的帳號密碼檔案
+        require_once("connect_chd104g4.php");
+    }
+
     // SQL 查詢
     $sql = "SELECT * FROM comment";  // 修改為您的 SQL 查詢
     // $sql = "SELECT p.product_no, pc.product_class_name, pt.product_tag_name, p.product_name, p.product_price, p.product_status 
