@@ -24,7 +24,8 @@ try{
     // 參數 "php://input" 是用於讀取請求主體的URL，特別是對於 POST 請求
     // json_decode 函數用於將 JSON 字符串轉換為 PHP 關聯數組（如果第二個參數為 true）或對象（如果第二個參數為 false或省略）
     $data = json_decode(file_get_contents('php://input'), true);
-
+    
+    // bindValue 按值綁定，這意味著在語句執行後，參數的值不受後續變更的影響
     $couSQLStatement->bindValue(':mem_id', $data['mem_id']);
 
     // 執行 SQL: 使用 PDO（PHP Data Objects）中的 execute 方法，執行之前準備好的 SQL 查詢
@@ -37,7 +38,7 @@ try{
         // fetchAll 方法將所有的查詢結果取出。PDO::FETCH_ASSOC 參數表示將結果以關聯陣列的形式返回，這樣每一行的資料就是一個關聯陣列。
         //  最後，將取得的資料轉換成 JSON 格式並輸出到客戶端。json_encode 函式將 PHP 陣列轉換為 JSON 字串
     }else{
-        echo json_encode(['errMsg'=>'沒有找到優惠券資料']);
+        echo json_encode(['errMsg'=>'目前沒有優惠券']);
     }
 
 }catch(PDOException $e){
