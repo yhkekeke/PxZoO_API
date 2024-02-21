@@ -14,7 +14,7 @@ try{
     }
 
     // SQL 查詢指令
-    $couSQL ='SELECT DISTINCT cd.cou_id, c.cou_name, c.cou_discount, cd.mem_id, cd.ord_id FROM coupon c JOIN coupon_detail cd ON c.cou_id=cd.cou_id WHERE cd.mem_id=:mem_id AND cd.ord_id IS NULL AND (cd.cou_exp>0 OR cd.cou_exp IS NULL) ORDER BY c.cou_discount, cd.cou_detail_time;';
+    $couSQL ='SELECT DISTINCT cd.cou_detail_id, cd.cou_id, c.cou_name, c.cou_discount, cd.mem_id, cd.ord_id FROM coupon c JOIN coupon_detail cd ON c.cou_id=cd.cou_id WHERE cd.mem_id=:mem_id AND cd.ord_id IS NULL AND (cd.cou_exp>0 OR cd.cou_exp IS NULL) ORDER BY c.cou_discount, cd.cou_detail_time;';
 
     // 準備 SQL 查詢
     $couSQLStatement = $pdo->prepare($couSQL);
@@ -34,18 +34,25 @@ try{
     // 檢查是否有資料
     if($couSQLStatement->rowCount()>0){
         $couData = $couSQLStatement->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($couData);
         // fetchAll 方法將所有的查詢結果取出。PDO::FETCH_ASSOC 參數表示將結果以關聯陣列的形式返回，這樣每一行的資料就是一個關聯陣列。
         //  最後，將取得的資料轉換成 JSON 格式並輸出到客戶端。json_encode 函式將 PHP 陣列轉換為 JSON 字串
+
+        // 記錄成功的 log
+        error_log('Coupon selected successfully');
+
+        $result = [ 'data' => $couData];
     }else{
-        echo json_encode(['errMsg'=>'目前沒有優惠券']);
+        $result = ['error' => true, 'errMsg'=>'目前沒有優惠券'];
     }
 
 }catch(PDOException $e){
     // 捕捉一個特定型別的例外狀況(即 PDOException)
     // 在這個情境中，PDOException 是與 PDO 有關的例外狀況，通常發生在與資料庫的連線、查詢等操作中。
+    $result = ['errMsg' => '執行失敗，無法檢索優惠券資料，請聯繫系統管理員。原因: ' . $e->getMessage()];
 
-    echo json_encode(['errMsg'=>'執行失敗:'.$e->getMessage()]);
-
+    // 記錄錯誤的 log
+    error_log($result['errMsg']);
 }
+echo json_encode($result);
+exit; // 新增這一行，確保在返回 JSON 資料後停止腳本的執行
 ?>
