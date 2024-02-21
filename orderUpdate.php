@@ -1,5 +1,4 @@
 <?php
-
 ini_set("display_errors", "On"); //PHP偵錯
 
 try{
@@ -32,16 +31,18 @@ try{
     $updateOrderStatement->execute();
 
     // 記錄成功的 log
-    error_log('Order altered successfully');
+    error_log('Order updated successfully');
 
     $result = ['error'=>false, 'msg'=>"異動成功"];
 
 }catch(PDOException $e){
-    
-    // 記錄錯誤的 log
-    error_log('Error altering order: ' . $e->getMessage());
+    // 捕捉一個特定型別的例外狀況(即 PDOException)
+    // 在這個情境中，PDOException 是與 PDO 有關的例外狀況，通常發生在與資料庫的連線、查詢等操作中。
+    $result = ['error' => true, 'msg' => "訂單異動失敗，請聯繫系統管理員。原因: " . $e->getMessage()];
 
-    $result=['error'=>true, "msg"=>$e->getMessage()];
+    // 記錄錯誤的 log
+    error_log($result['errMsg']);
 }
 echo json_encode($result);
+exit; // 新增這一行，確保在返回 JSON 資料後停止腳本的執行
 ?>
