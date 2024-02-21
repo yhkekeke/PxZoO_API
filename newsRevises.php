@@ -13,21 +13,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once("connectPxzoo.php");
 
     // 從 HTTP 請求中獲取 JSON 格式的輸入數據
-    $inputJSON = file_get_contents('php://input');
-    $input = json_decode($inputJSON, TRUE); // 將 JSON 字符串轉換為 PHP 關聯數組
+    // $inputJSON = file_get_contents('php://input');
+    // $input = json_decode($inputJSON, TRUE); // 將 JSON 字符串轉換為 PHP 關聯數組
 
     // 從解析過後的資料中提取特定屬性值
 
-    $news_id = $input['news_id'];
-    $news_title = $input['news_title'];
-    $news_type = $input['news_type'];
-    $news_typepic = $input['news_typepic'];
-    $news_date = $input['news_date'];
-    $news_pic = $input['news_pic'];
-    $news_text_1 = $input['news_text_1'];
-    $news_text_2 = $input['news_text_2'];
-    $news_text_3 = $input['news_text_3'];
-    $news_text_4 = $input['news_text_4'];
+    $news_id = $_POST['news_id'];
+    $news_title = $_POST['news_title'];
+    $news_type = $_POST['news_type'];
+    $news_date = $_POST['news_date'];
+    $news_text_1 = $_POST['news_text_1'];
+    $news_text_2 = $_POST['news_text_2'];
+    $news_text_3 = $_POST['news_text_3'];
+    $news_text_4 = $_POST['news_text_4'];
 
 
     // 新的圖片 URL，如果有的話
@@ -39,11 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // 更新圖片 URL 並移動檔案
     if (!empty($new_news_typepic)) {
-        $news_typepic = $target_directory . basename($_FILES["new_news_typepic"]["name"]);
+        $news_typepic = $target_directory . 'newsFrame/' . basename($new_news_typepic);
         move_uploaded_file($_FILES["news_typepic"]["tmp_name"], $news_typepic);
     }
     if (!empty($new_news_pic)) {
-        $news_pic = $target_directory . basename($_FILES["new_news_pic"]["name"]);
+        $news_pic = $target_directory . basename($new_news_pic);
         move_uploaded_file($_FILES["news_pic"]["tmp_name"], $news_pic);
     }
 
@@ -65,9 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // 綁定參數到預處理語句
     $stmt->bindParam(1, $news_title);
     $stmt->bindParam(2, $news_type);
-    $stmt->bindParam(3, $news_typepic);
+    $stmt->bindParam(3, $new_news_typepic);
     $stmt->bindParam(4, $news_date);
-    $stmt->bindParam(5, $news_pic);
+    $stmt->bindParam(5, $new_news_pic);
     $stmt->bindParam(6, $news_text_1);
     $stmt->bindParam(7, $news_text_2);
     $stmt->bindParam(8, $news_text_3);
