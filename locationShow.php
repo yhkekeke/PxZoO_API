@@ -11,13 +11,9 @@ try {
         // 生產環境
         require_once("connect_chd104g4.php");
     }
-
-    // 使用判斷式判定從Vue回傳的值再決定執行什麼SQL指令 
-    if(isset($_GET['type']) && $_GET['type'] === 'nonull'){
-        $sql = "SELECT * FROM location WHERE animal_id IS NULL";// 修改為您的 SQL 查詢
-    } else if(isset($_GET['type']) && $_GET['type'] === 'allshow'){
-        $sql = "SELECT * FROM location";// 修改為您的 SQL 查詢
-    }
+   
+    $sql = "SELECT * FROM location WHERE animal_id IS NULL";// 修改為您的 SQL 查詢
+   
 
     // 準備 SQL 查詢
     $locations = $pdo->prepare($sql);
