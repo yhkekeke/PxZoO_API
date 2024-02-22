@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 執行 SQL 插入語句
     if ($stmt->execute()) {
         echo "新增記錄成功";
+        
     } else {
         echo "錯誤: " . $stmt->errorInfo();
     }

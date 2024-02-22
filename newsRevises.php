@@ -13,11 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once("connectPxzoo.php");
 
     // 從 HTTP 請求中獲取 JSON 格式的輸入數據
-    // $inputJSON = file_get_contents('php://input');
-    // $input = json_decode($inputJSON, TRUE); // 將 JSON 字符串轉換為 PHP 關聯數組
+    $inputJSON = file_get_contents('php://input');
+    $input = json_decode($inputJSON, TRUE); // 將 JSON 字符串轉換為 PHP 關聯數組
 
     // 從解析過後的資料中提取特定屬性值
-
     $news_id = $_POST['news_id'];
     $news_title = $_POST['news_title'];
     $news_type = $_POST['news_type'];
@@ -29,8 +28,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     // 新的圖片 URL，如果有的話
+    $news_typepic = $_POST['news_typepic'] ?? '';
+    $news_pic = $_POST['news_pic'] ?? '';
+
     $new_news_typepic = $_FILES['news_typepic']["name"] ?? '';
     $new_news_pic = $_FILES['news_pic']["name"] ?? '';
+
+    // 如果沒有上傳新圖片，則使用原始圖片名稱
+    if (empty($new_news_typepic)) {
+        $new_news_typepic = $news_typepic;
+    }
+    if (empty($new_news_pic)) {
+        $new_news_pic = $news_pic;
+    }
 
     // 目標路徑
     $target_directory = '../images/news/';
@@ -39,10 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($new_news_typepic)) {
         $news_typepic = $target_directory . 'newsFrame/' . basename($new_news_typepic);
         move_uploaded_file($_FILES["news_typepic"]["tmp_name"], $news_typepic);
+    } else {
+        $news_typepic = $news_typepic; // 使用已有的圖片名稱
     }
     if (!empty($new_news_pic)) {
         $news_pic = $target_directory . basename($new_news_pic);
         move_uploaded_file($_FILES["news_pic"]["tmp_name"], $news_pic);
+    } else {
+        $news_pic = $news_pic; // 使用已有的圖片名稱
     }
 
     // 準備 SQL 更新語句，請根據您的數據庫實際情況進行調整
