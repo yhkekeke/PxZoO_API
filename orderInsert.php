@@ -103,8 +103,8 @@ try{
     // 如果一切正常，提交事務
     $pdo->commit();
 
-    $result = ['error' => false, 'errMsg' => 'Order inserted & Order_detail inserted & cou_detail updated successfully.'];
-    error_log($result['errMsg']);
+    $result = $lastOrdId; 
+    error_log('Order inserted & Order_detail inserted & cou_detail updated successfully.');
   }else{
     $result = ['error' => true, 'errMsg' => '執行失敗，無法新增訂單資料，請聯繫系統管理員。原因: ' . $e->getMessage()];
   }
