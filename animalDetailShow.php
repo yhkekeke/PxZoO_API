@@ -64,7 +64,7 @@ try {
         }
     } 
     if((isset($_GET['type']) && $_GET['type'] === 'animalList')){
-        $ani_sql = "SELECT a.animal_id, a.animal_species, a.animal_small_pic, l.category_name
+        $ani_sql = "SELECT a.animal_id, a.animal_species, a.animal_small_pic, a.animal_status, l.category_name
         FROM animal a JOIN location l ON a.location_name = l.location_name"; 
 
         $animalList = $pdo->prepare($ani_sql);
