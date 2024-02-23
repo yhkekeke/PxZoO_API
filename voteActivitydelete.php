@@ -1,9 +1,17 @@
 <?php
-// 引入連接資料庫的文件，假設是 db_connect.php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS,DELETE");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-require_once("../../g4/api/connectPxzoo.php");
+//下面這個if則是我設定好讓它在開發時，會自動判斷我們是在開發環境還是在網站上線
+if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
+    // 開發環境
+    //這是本地端的mySQL資料庫帳號密碼檔案
+    require_once("connectPxzoo.php");
+        //允許跨域存取
+    header("Access-Control-Allow-Origin: *"); // 允許所有來源
+    header("Content-Type: application/json; charset=UTF-8");
+} else {
+    // 生產環境  
+    //這裡則是我們網站上線後要偵測緯育資料庫的帳號密碼檔案
+    require_once("connect_chd104g4.php");
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
