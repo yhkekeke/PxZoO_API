@@ -3,14 +3,14 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-require_once("connectPxzoo.php");
+require_once("../../g4/api/connectPxzoo.php");
 
 // $dbname = "pxzoo";   // 資料庫名稱改為 pxzoo
 // $user = "root";
 // $password = "";
 // $port = 3306;
 
-// $dsn = "mysql:host=localhost;port={$port};dbname=$dbname;charset=utf8";
+// $dsn = "mysql:host=localhost;port={$port};dbname=$dbWname;charset=utf8";
 
 // 建立 PDO 物件
 $pdo = new PDO($dsn, $user, $password, $options);

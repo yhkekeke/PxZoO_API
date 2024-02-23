@@ -10,34 +10,41 @@ try {
 
         // 如果是在開發環境
         require_once("connectPxzoo.php");
-
     } else {
-
         // 如果是在生產環境
         require_once("connect_chd104g4.php");
-        
     }
 
     // 從 HTTP 請求中獲取 JSON 格式的輸入數據
     $inputJSON = file_get_contents('php://input');
     $input = json_decode($inputJSON, TRUE); // 將 JSON 字符串轉換為 PHP 關聯數組
 
-    // 準備 SQL 查詢語句
-    $sql = "SELECT l.category_name, l.location_name,a.animal_id, a.animal_species, a.animal_name, a.animal_icon,a.animal_small_pic FROM location l LEFT JOIN animal a ON l.animal_id = a.animal_id";
+    // 從解析過後的資料中提取特定屬性值
+    $mem_id = $input['mem_id'];
+    $cou_id = $input['cou_id'];
+ 
 
-    // 預處理 SQL 查詢語句
+    // 準備 SQL 更新語句，請根據您的數據庫實際情況進行調整
+    $sql = "INSERT INTO coupon_detail (mem_id, cou_id)
+    VALUES (?, ?)";
+
+    // 預處理 SQL 語句
     $stmt = $pdo->prepare($sql);
 
-    // 執行 SQL 查詢
+    // 綁定參數到預處理語句
+    $stmt->bindParam(1, $mem_id);
+    $stmt->bindParam(2, $cou_id);
+
+    // 執行 SQL 語句
     $stmt->execute();
 
-    // 獲取結果集
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // 輸出 JSON 格式的結果
-    echo json_encode($result);
+    // 檢查更新操作是否成功
+    if ($stmt->rowCount() > 0) {
+        echo json_encode(["successMsg" => "更新成功"]);
+    } else {
+        echo json_encode(["errMsg" => "更新失敗"]);
+    }
 } catch (PDOException $e) {
-    // 捕獲異常並輸出錯誤信息
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
 }
 ?>

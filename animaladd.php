@@ -1,19 +1,15 @@
 <?php
 try {
-//下面這個if則是我設定好讓它在開發時，會自動判斷我們是在開發環境還是在網站上線
+// 根據當前環境選擇數據庫連接
 if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-    // 開發環境
-    //這是本地端的mySQL資料庫帳號密碼檔案
+    header("Access-Control-Allow-Origin: *"); // 允許跨域存取
+    header("Access-Control-Allow-Headers: Content-Type");//設定回傳資料的解析方式
+    header("Content-Type: application/json; charset=UTF-8");//設定回傳的資料類型和編碼
+
+    // 如果是在開發環境
     require_once("connectPxzoo.php");
-        //允許跨域存取
-    header("Access-Control-Allow-Origin: *"); // 允許所有來源
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Origin: http://localhost:5173");
-    header("Access-Control-Allow-Methods: POST"); // 根據您的需要設置允許的 HTTP 方法
-    header("Access-Control-Allow-Headers: Content-Type"); // 根據您的需要設置允許的標頭
 } else {
-    // 生產環境  
-    //這裡則是我們網站上線後要偵測緯育資料庫的帳號密碼檔案
+    // 如果是在生產環境
     require_once("connect_chd104g4.php");
 }
 // 檢查是否有提交表單
@@ -38,9 +34,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $animal_icon = $_FILES["animal_icon"]["name"] ?? '';
     $animal_sound = $_FILES["animal_sound"]["name"] ?? '';
     $animal_small_pic = $_FILES["animal_small_pic"]["name"] ?? '';
+      
+      echo json_encode($filesInfo);
+    //--------------取得上傳檔案
+    // if ($_FILES["animal_icon"]["error"] === 0) {
+    //     $dir = "../images/animal/animal_icon/";
+    //     if (!file_exists($dir)) {
+    //         mkdir($dir);
+    //     }
+    //     $from = $_FILES["animal_icon"]["tmp_name"];
+    //     $to = $dir . $animal_icon;
+    //     if (move_uploaded_file($from, $to)) {
+    //         // 檔案成功移動
+    //     } else {
+    //         $result = ["error" => true, "msg" => "檔案移動失敗"];
+    //     }
+    // } else {
+    //     $result = ["error" => true, "msg" => "檔案上傳失敗"];
+    // }
 
-
-    // 將上傳的圖片移動到指定的資料夾中
+    // // 將上傳的圖片移動到指定的資料夾中
     move_uploaded_file($_FILES["animal_pic_a"]["tmp_name"], "../images/animal/animal_pic/" . $_FILES["animal_pic_a"]["name"]);
     if(isset($_FILES['animal_pic_b']) && !empty($_FILES['animal_pic_b'])) {
         // 處理 animal_pic_b 的上傳圖片
@@ -56,20 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     move_uploaded_file($_FILES["animal_sound"]["tmp_name"], "../images/animal/audio/" . $_FILES["animal_sound"]["name"]);
 
 
-
-    //SQL 插入語句
-    //插入 location 資料
-    // $sqlLocation = "INSERT INTO location (category_name) VALUES (?)";
-    // $stmtLocation = $pdo->prepare($sqlLocation);
-    // $stmtLocation->bindParam(1, $category_name);
-    // // $stmtLocation->bindParam(2, $location_name);
-
-    // if ($stmtLocation->execute()) {
-    // echo "插入 location 資料成功";
-    // } else {
-    // echo "錯誤: " . $stmtLocation->errorInfo()[2];
-    // }
-
+    $pdo->beginTransaction();
     // 插入 animal 資料
     $sqlAnimal = "INSERT INTO animal (animal_species, animal_name,
     location_name, animal_enterdate, animal_lifespan, animal_area, animal_food, animal_features, animal_description, animal_pic_a, animal_pic_b, animal_pic_c, animal_icon, animal_sound, animal_small_pic, animal_status) 
@@ -92,14 +92,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmtAnimal->bindParam(14, $animal_sound);
     $stmtAnimal->bindParam(15, $animal_small_pic);
 
-    if ($stmtAnimal->execute()) {
-        echo "新增 animal 記錄成功";
+    $stmtAnimal->execute();
+    // if ($stmtAnimal->execute()) {
+    //     echo "新增 animal 記錄成功";
+    // } else {
+    //     echo "錯誤: " . $stmtAnimal->errorInfo()[2];
+    // }
+
+    // 獲取新 animal_id
+    $lastInsertedId = $pdo->lastInsertId();
+
+    // 更新 location 表中的 animal_id
+    $sqlLocation = "UPDATE location SET animal_id = ? WHERE location_name = ?";
+    $stmtLocation = $pdo->prepare($sqlLocation);
+    $stmtLocation->bindParam(1, $lastInsertedId);
+    $stmtLocation->bindParam(2, $location_name);
+
+    // 執行 location 更新指令
+    if ($stmtLocation->execute()) {
+        echo "更新 location 成功";
     } else {
-        echo "錯誤: " . $stmtAnimal->errorInfo()[2];
+        echo json_encode(["errMsg" => "錯誤: " . $stmtLocation->errorInfo()[2]]);
+        $pdo->rollBack(); // 回滾事物
+        exit; // 停止執行代碼
     }
 
-    //$stmtLocation->closeCursor();
-    $stmtAnimal->closeCursor();
+    // 提交事务
+    $pdo->commit();
 }
 } catch (PDOException $e) {
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);

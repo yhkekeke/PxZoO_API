@@ -3,7 +3,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS,DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-require_once("connectPxzoo.php");
+require_once("../../g4/api/connectPxzoo.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
