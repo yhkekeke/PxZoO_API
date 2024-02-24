@@ -23,7 +23,7 @@ try {
     $input = json_decode($inputJSON, TRUE); // 將 JSON 字符串轉換為 PHP 關聯數組
 
     // 準備 SQL 查詢語句
-    $sql = "SELECT l.category_name, l.location_name,a.animal_id, a.animal_species, a.animal_name, a.animal_icon,a.animal_small_pic FROM location l LEFT JOIN animal a ON l.animal_id = a.animal_id";
+    $sql = "SELECT l.category_name, l.location_name,a.animal_id, a.animal_species, a.animal_name,a.animal_status, a.animal_icon,a.animal_small_pic FROM location l LEFT JOIN animal a ON l.animal_id = a.animal_id";
 
     // 預處理 SQL 查詢語句
     $stmt = $pdo->prepare($sql);
