@@ -22,23 +22,23 @@
 
         $searchTerm = $_GET['searchTerm'];
         // SQL 查詢，模糊查詢
-        $sql = "SELECT * FROM news
-        WHERE news_id LIKE :searchTerm OR news_title LIKE :searchTerm OR news_type LIKE :searchTerm OR news_date LIKE :searchTerm OR news_text_1 LIKE :searchTerm OR news_text_2 LIKE :searchTerm OR news_text_3 LIKE :searchTerm OR news_text_4 LIKE :searchTerm";
+        $sql = "SELECT * FROM comment
+        WHERE com_id LIKE :searchTerm OR mem_id LIKE :searchTerm OR com_text LIKE :searchTerm OR com_pic LIKE :searchTerm OR com_date LIKE :searchTerm";
         // 修改為您的 SQL 查詢
-        $news = $pdo->prepare($sql);
+        $com = $pdo->prepare($sql);
         // 準備 SQL 查詢
         $searchTerm = "%$searchTerm%"; // 在搜尋條件的兩側添加 %
-        $news->bindValue(':searchTerm', $searchTerm, PDO::PARAM_STR);
+        $com->bindValue(':searchTerm', $searchTerm, PDO::PARAM_STR);
 
         // 執行 SQL 查詢
-        $news->execute();
+        $com->execute();
 
         // 檢查是否有資料
-        if ($news->rowCount() > 0) {
-            $newsData = $news->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($newsData);
+        if ($com->rowCount() > 0) {
+            $comData = $com->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($comData);
         } else {
-            echo json_encode(["errMsg" => "沒有找到消息資料"]);
+            echo json_encode(["errMsg" => "沒有找到留言資料"]);
         }
     } catch (PDOException $e) {
         echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);

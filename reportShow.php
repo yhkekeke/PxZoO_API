@@ -15,7 +15,9 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT * FROM report";  // 修改為您的 SQL 查詢
+    $sql = "SELECT r.*, m.mem_name, c.com_text, c.com_pic
+            FROM report r JOIN member m ON r.mem_id = m.mem_id 
+                        JOIN comment c ON r.com_id = c.com_id"; 
 
     // 準備 SQL 查詢
     $report = $pdo->prepare($sql);

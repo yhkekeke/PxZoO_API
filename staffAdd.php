@@ -10,7 +10,7 @@ try {
         require_once("connectPxzoo.php");
     } else {
         // 生產環境
-        require_once("connect_chd104g4.php");
+        require_once("connectPxzoo.php");
     }
 
     

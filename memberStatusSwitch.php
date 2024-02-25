@@ -19,16 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $inputJSON = file_get_contents('php://input');
     $input = json_decode($inputJSON, TRUE); // 將 JSON 字符串轉換為 PHP 關聯數組
 
-    $animal_id = $input["animal_id"];
-    $animal_status = $input["animal_status"];
+    $mem_id = $input["mem_id"];
+    $mem_status = $input["mem_status"];
 
-    // 準備 SQL 更新語句
-    $sql = "UPDATE animal SET animal_status = ?
-    WHERE animal_id = ?";
+    // 準備 SQL 更新語句，請根據您的數據庫實際情況進行調整
+    $sql = "UPDATE member SET mem_status = ?
+    WHERE mem_id = ?";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(1, $animal_status);
-    $stmt->bindParam(2, $animal_id);
+    $stmt->bindParam(1, $mem_status);
+    $stmt->bindParam(2, $mem_id);
 
     $stmt->execute();
     // 檢查更新操作是否成功
