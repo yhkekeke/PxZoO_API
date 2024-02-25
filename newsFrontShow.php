@@ -13,21 +13,20 @@ try {
         //這裡則是我們網站上線後要偵測緯育資料庫的帳號密碼檔案
         require_once("connect_chd104g4.php");
     }
-
-    // SQL 查詢
-    $sql = "SELECT c.*, m.mem_name
-            FROM comment c JOIN member m ON c.mem_id = m.mem_id";
     
+    // SQL 查詢
+    $sql = "SELECT * FROM news  WHERE news_status = 1";  // 修改為您的 SQL 查詢
+
     // 準備 SQL 查詢
-    $comment = $pdo->prepare($sql);
+    $news = $pdo->prepare($sql);
 
     // 執行 SQL 查詢
-    $comment->execute();
+    $news->execute();
 
     // 檢查是否有資料
-    if ($comment->rowCount() > 0) {
-        $commentData = $comment->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($commentData);
+    if ($news->rowCount() > 0) {
+        $newsData = $news->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($newsData);
     } else {
         echo json_encode(["errMsg" => "沒有找到資料"]);
     }
