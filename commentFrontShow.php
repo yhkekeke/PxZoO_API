@@ -15,9 +15,8 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT c.*, m.mem_name
-            FROM comment c JOIN member m ON c.mem_id = m.mem_id";
-    
+    $sql = "SELECT * FROM comment WHERE com_status = 1";
+
     // 準備 SQL 查詢
     $comment = $pdo->prepare($sql);
 
