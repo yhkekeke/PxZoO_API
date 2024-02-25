@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $animal_id = $input["animal_id"];
     $animal_status = $input["animal_status"];
 
-    // 準備 SQL 更新語句，請根據您的數據庫實際情況進行調整
+    // 準備 SQL 更新語句
     $sql = "UPDATE animal SET animal_status = ?
     WHERE animal_id = ?";
 
