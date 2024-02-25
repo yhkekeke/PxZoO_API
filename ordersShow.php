@@ -6,6 +6,7 @@ try {
     // 開發環境
     require_once('connectPxzoo.php');
     header('Access-Control-Allow-Origin: *'); // 允許跨域存取，* 表示允許所有網域的前端頁面
+    header('Access-Control-Allow-Headers: Content-Type'); // 允許使用 Content-Type 這個請求標頭
     header("Content-Type: application/json; charset=UTF-8"); // 回傳給前端的資料類型及字元編碼
   }else{
     // 生產環境

@@ -30,8 +30,6 @@ try {
   // 將 SQL 語句中的第一個問號 ? 綁定到 $_GET["ord_id"] 的值
   $orderDetailStatement->bindValue(1, $ord_id, PDO::PARAM_INT);
 
-  // $orderDetailStatement->bindValue(1, $_GET['ord_id']); 原本的寫法可能包含未經過濾的、不安全的使用者輸入，因此有潛在的 SQL 隱碼攻擊風險
-
   // 執行 SQL
   $orderDetailStatement->execute();
 
