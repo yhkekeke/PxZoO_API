@@ -18,8 +18,8 @@
 
 
         // SQL 查詢
-        $sql = "SELECT * FROM questions ORDER BY RAND() LIMIT 10";  // 修改為您的 SQL 查詢
-
+        $sql = "SELECT * FROM questions  WHERE question_status = 1 ORDER BY RAND() LIMIT 10";  // 修改為您的 SQL 查詢
+      
         // 準備 SQL 查詢
         $questions = $pdo->prepare($sql);
 
