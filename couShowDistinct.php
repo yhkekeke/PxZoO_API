@@ -14,7 +14,7 @@ try{
   }
 
   // SQL 查詢指令
-  $couSQL ='SELECT DISTINCT cd.cou_detail_id, cd.cou_id, c.cou_name, c.cou_discount, cd.mem_id, cd.ord_id FROM coupon c JOIN coupon_detail cd ON c.cou_id=cd.cou_id WHERE cd.mem_id=:mem_id AND cd.ord_id IS NULL AND (cd.cou_exp>0 OR cd.cou_exp IS NULL) ORDER BY c.cou_discount, cd.cou_detail_time;';
+  $couSQL ='SELECT DISTINCT cd.cou_detail_id, cd.cou_id, c.cou_name, c.cou_discount, cd.mem_id, cd.ord_id FROM coupon c JOIN coupon_detail cd ON c.cou_id=cd.cou_id WHERE cd.mem_id=:mem_id AND cd.ord_id IS NULL AND (cd.cou_exp>0 OR cd.cou_exp IS NULL) GROUP BY cd.cou_id ORDER BY c.cou_discount, cd.cou_detail_time;';
 
   // 準備 SQL 查詢
   $couSQLStatement = $pdo->prepare($couSQL);
