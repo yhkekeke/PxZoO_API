@@ -31,16 +31,23 @@ try {
         // 執行 SQL 語句
         $stmt->execute();
 
+        // JavaScript 部分
+        echo '<script type="text/javascript">';
+        echo 'window.onload = function() {';
+        echo '    window.close();'; // 嘗試關閉視窗
+        echo '}';
+        echo '</script>';
+
         // 檢查更新是否成功
         if ($stmt->rowCount() > 0) {
-            echo json_encode(["successMsg" => "訂單狀態更新成功"]);
+            echo '<p>訂單狀態更新成功</p>';
         } else {
-            echo json_encode(["errMsg" => "訂單狀態更新失敗"]);
+            echo '<p>訂單狀態更新失敗</p>';
         }
     } else {
-        echo json_encode(["errMsg" => "缺少必要的參數"]);
+        echo '<p>缺少必要的參數</p>';
     }
 } catch (PDOException $e) {
-    echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);
+    echo '<p>執行失敗: ' . $e->getMessage() . '</p>';
 }
 ?>
