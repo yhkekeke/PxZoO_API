@@ -22,8 +22,9 @@
 
         $searchTerm = $_GET['searchTerm'];
         // SQL 查詢，模糊查詢
-        $sql = "SELECT * FROM comment
-        WHERE com_id LIKE :searchTerm OR mem_id LIKE :searchTerm OR com_text LIKE :searchTerm OR com_pic LIKE :searchTerm OR com_date LIKE :searchTerm";
+        $sql = "SELECT c.*, m.mem_name
+                FROM comment c JOIN member m ON c.mem_id = m.mem_id
+                WHERE c.com_id LIKE :searchTerm OR m.mem_id LIKE :searchTerm OR m.mem_name LIKE :searchTerm OR c.com_text LIKE :searchTerm OR c.com_pic LIKE :searchTerm OR c.com_date LIKE :searchTerm";
         // 修改為您的 SQL 查詢
         $com = $pdo->prepare($sql);
         // 準備 SQL 查詢

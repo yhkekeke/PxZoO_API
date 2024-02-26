@@ -29,14 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // SQL 插入語句
     $sql = "INSERT INTO comment (com_text, mem_id, com_pic, com_status) 
-    VALUES (?, ?, ?, 1)";
+    VALUES (?, 2, ?, 1)";
 
     // 預備語句
     $stmt = $pdo->prepare($sql);
     // 綁定參數
     $stmt->bindParam(1, $com_text);
-    $stmt->bindParam(2, $mem_id);
-    $stmt->bindParam(3, $com_pic);
+    // $stmt->bindParam(2, $mem_id);
+    $stmt->bindParam(2, $com_pic);
 
     // 執行 SQL 插入語句
     if ($stmt->execute()) {

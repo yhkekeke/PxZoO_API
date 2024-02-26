@@ -7,7 +7,7 @@ header("Content-Type: application/json; charset=UTF-8");
 if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
     require_once("connectPxzoo.php");
 } else {
-    require_once("connectPxzoo.php"); 
+    require_once("connect_chd104g4.php");
 }
 try {
     $com_id=$_POST['com_id'];

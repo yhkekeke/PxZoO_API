@@ -22,8 +22,10 @@
 
         $searchTerm = $_GET['searchTerm'];
         // SQL 查詢，模糊查詢
-        $sql = "SELECT * FROM report
-        WHERE report_id LIKE :searchTerm OR com_id LIKE :searchTerm OR mem_id LIKE :searchTerm OR report_text LIKE :searchTerm";
+        $sql = "SELECT r.*, m.mem_name, c.com_text, c.com_pic
+                FROM report r JOIN member m ON r.mem_id = m.mem_id JOIN comment c ON r.com_id = c.com_id
+                WHERE r.report_id LIKE :searchTerm OR c.com_id LIKE :searchTerm OR m.mem_id LIKE :searchTerm OR m.mem_name LIKE :searchTerm OR r.report_text LIKE :searchTerm";
+
         // 修改為您的 SQL 查詢
         $report = $pdo->prepare($sql);
         // 準備 SQL 查詢
