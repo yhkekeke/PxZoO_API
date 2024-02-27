@@ -21,8 +21,7 @@ try {
 
     // 確認 animal_id 是否存在，以及是否為有效值
     if ($animal_id !== null && is_numeric($animal_id)) {
-        // 創建數據庫連接
-        require_once("connectPxzoo.php");
+   
 
         // 更新票數
         $sql = "UPDATE animal SET animal_vote = animal_vote + 1 WHERE animal_id = :animal_id";
