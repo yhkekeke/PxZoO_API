@@ -14,7 +14,7 @@ try {
     }
 
     
-    $sql = "insert into member(mem_name, mem_acc, mem_psw) values (:mem_name,:mem_acc,:mem_psw)";
+    $sql = "insert into member(mem_name, mem_acc, mem_psw , mem_status) values (:mem_name,:mem_acc,:mem_psw , 1)";
     // 編譯sql指令
 $mem = $pdo->prepare($sql);
     //將資料放入並執行之
