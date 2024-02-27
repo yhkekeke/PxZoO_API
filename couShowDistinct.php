@@ -40,7 +40,7 @@ try{
     // 記錄成功的 log
     error_log('Coupon selected successfully');
 
-    $result = [ 'data' => $couData];
+    $result = $couData;
   }else{
     $result = ['error' => true, 'errMsg'=>'目前沒有優惠券'];
   }
