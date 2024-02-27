@@ -32,7 +32,7 @@ try {
 
     // 檢查更新操作是否成功
     if ($stmt->rowCount() > 0) {
-        echo json_encode(["successMsg" => "更新成功"]);
+        echo json_encode(["successMsg" => "更新成功", "mem_pic"=>$mem_pic]);
     } else {
         echo json_encode(["errMsg" => "更新失敗"]);
     }
