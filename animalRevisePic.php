@@ -39,81 +39,42 @@ try {
     $original_small_pic = $row['animal_small_pic'];
 
  
-    // 從解析過後的資料中提取特定屬性值
-
-
     if (!empty($_FILES['animal_pic_a'])) {
         $animal_pic_a = $_FILES["animal_pic_a"]["name"] ?? '';
     } else {
-        // 如果没有上传新的 animal_pic_a，保持原始值不变
+        // 如果没有上傳新的 animal_pic_a，保持原始值不變
         $animal_pic_a = $original_pic_a ?? '';
     }
 
     if (!empty($_FILES['animal_pic_b'])) {
         $animal_pic_b = $_FILES["animal_pic_b"]["name"] ?? '';
     } else {
-        // 如果没有上传新的 animal_pic_a，保持原始值不变
         $animal_pic_b = $original_pic_b ?? '';
     }
 
     if (!empty($_FILES['animal_pic_c'])) {
         $animal_pic_c = $_FILES["animal_pic_c"]["name"] ?? '';
     } else {
-        // 如果没有上传新的 animal_pic_a，保持原始值不变
         $animal_pic_c = $original_pic_c ?? '';
     }
 
     if (!empty($_FILES['animalIcon'])) {
         $animal_icon = $_FILES["animalIcon"]["name"] ?? '';
     } else {
-        // 如果没有上传新的 animal_pic_a，保持原始值不变
         $animal_icon = $original_icon ?? '';
     }
 
     if (!empty($_FILES['animalSound'])) {
         $animal_sound = $_FILES["animalSound"]["name"] ?? '';
     } else {
-        // 如果没有上传新的 animal_pic_a，保持原始值不变
         $animal_sound = $original_sound ?? '';
     }
 
     if (!empty($_FILES['animal_small_pic'])) {
         $animal_small_pic = $_FILES["animal_small_pic"]["name"] ?? '';
     } else {
-        // 如果没有上传新的 animal_pic_a，保持原始值不变
         $animal_small_pic = $original_small_pic ?? '';
     }
-
-    
-     // 新的圖片 URL，如果有的話
-    // $new_animal_pic_a= $input['new_animal_pic_a']["name"] ?? '';
-    // $new_animal_pic_b= $input['new_animal_pic_b']["name"] ?? '';
-    // $new_animal_pic_c= $input['new_animal_pic_c']["name"] ?? '';
-    // $new_animal_icon= $input['new_animal_icon']["name"] ?? '';
-    // $new_animal_sound= $input['new_animal_sound']["name"] ?? '';
-    // $new_animal_small_pic= $input['new_animal_small_pic']["name"] ?? '';
-
-    // 如果沒有上傳新圖片，則使用原始圖片名稱
-    // if (empty($new_animal_pic_a)) {
-    //     $new_animal_pic_a = $animal_pic_a;
-    // }
-    // if (empty($new_animal_pic_b)) {
-    //     $new_animal_pic_b = $animal_pic_b;
-    // }
-    // if (empty($new_animal_pic_c)) {
-    //     $new_animal_pic_c = $animal_pic_c;
-    // }
-    // if (empty($new_animal_icon)) {
-    //     $new_animal_icon =  $animal_icon;
-    // }
-    // if (empty($new_animal_sound)) {
-    //     $new_animal_sound = $new_animal_sound;
-    // }
-    // if (empty($new_animal_small_pic)) {
-    //     $new_animal_small_pic = $animal_small_pic;
-    // }
-
-
 
     // 更新圖片 URL
     if(isset($_FILES['animal_pic_a']) && !empty($_FILES['animal_pic_a'])) {
