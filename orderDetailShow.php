@@ -1,5 +1,5 @@
 <?php
-ini_set("display_errors", "On"); // PHP偵錯
+// ini_set("display_errors", "On"); // PHP偵錯
 
 try {
   if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {

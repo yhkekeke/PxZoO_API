@@ -22,7 +22,6 @@ try {
     // 從解析過後的資料中提取特定屬性值
     $mem_id = $input['mem_id'];
     $cou_id = $input['cou_id'];
- 
 
     // 準備 SQL 更新語句，請根據您的數據庫實際情況進行調整
     $sql = "INSERT INTO coupon_detail (mem_id, cou_id)

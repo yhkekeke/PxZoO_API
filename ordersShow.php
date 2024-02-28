@@ -1,5 +1,5 @@
 <?php
-ini_set("display_errors", "On"); // PHP偵錯
+// ini_set("display_errors", "On"); // PHP偵錯
 
 try {
   if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
@@ -17,7 +17,7 @@ try {
   $searchTerm = isset($_GET['searchTerm']) ? "%".$_GET['searchTerm']."%" : '%';
 
   // SQL 查詢
-  $ordersSQL = 'SELECT o.* , m.mem_name, m.mem_title, SUM(od.ord_detail_qty) AS allqty, od.ord_detail_qty , c.cou_name , s.sta_pos FROM orders o JOIN member m ON o.mem_id = m.mem_id JOIN orders_detail od ON o.ord_id = od.ord_id LEFT JOIN coupon_detail cd ON od.ord_id = cd.ord_id LEFT JOIN coupon c ON cd.cou_id = c.cou_id LEFT JOIN staff s ON o.sta_id = s.sta_id WHERE o.ord_id LIKE :searchTerm OR m.mem_name LIKE :searchTerm GROUP BY o.ord_id ORDER BY o.ord_id ASC;';
+  $ordersSQL = 'SELECT o.* , m.mem_name, m.mem_title, SUM(od.ord_detail_qty) AS allqty, od.ord_detail_qty, c.cou_name, s.sta_pos FROM orders o JOIN member m ON o.mem_id = m.mem_id JOIN orders_detail od ON o.ord_id = od.ord_id LEFT JOIN coupon_detail cd ON od.ord_id = cd.ord_id LEFT JOIN coupon c ON cd.cou_id = c.cou_id LEFT JOIN staff s ON o.sta_id = s.sta_id WHERE o.ord_id LIKE :searchTerm OR m.mem_name LIKE :searchTerm OR o.ord_tidate LIKE :searchTerm GROUP BY o.ord_id ORDER BY o.ord_id ASC;';
 
   // 準備 SQL 查詢
   $ordersStatement = $pdo->prepare($ordersSQL);
