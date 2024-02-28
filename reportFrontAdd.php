@@ -23,20 +23,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 從表單中獲取數據
     $report_type = $_POST["report_type"] ?? '';
     $com_id = $_POST["com_id"] ?? '';
-    // $mem_id = $_POST["mem_id"] ?? '';
+    $mem_id = $_POST["mem_id"] ?? '';
     $report_text = $_POST["report_text"] ?? '';
 
     // SQL 插入語句
     $sql = "INSERT INTO report (report_type, com_id, mem_id, report_text, report_status) 
-    VALUES (?, ?, 3, ?, '未審核')";
+    VALUES (?, ?, ?, ?, '未審核')";
 
     // 預備語句
     $stmt = $pdo->prepare($sql);
     // 綁定參數
     $stmt->bindParam(1, $report_type);
     $stmt->bindParam(2, $com_id);
-    // $stmt->bindParam(3, $mem_id);
-    $stmt->bindParam(3, $report_text);
+    $stmt->bindParam(3, $mem_id);
+    $stmt->bindParam(4, $report_text);
 
     // 執行 SQL 插入語句
     if ($stmt->execute()) {

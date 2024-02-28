@@ -22,6 +22,7 @@ $pdo->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 從表單中獲取數據
     $com_text = $_POST["com_text"] ?? '';
+    $mem_id = $_POST["mem_id"] ?? '';
     $com_pic = $_FILES["com_pic"]["name"] ?? '';
 
     // 將上傳的圖片移動到指定的資料夾中
@@ -29,14 +30,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // SQL 插入語句
     $sql = "INSERT INTO comment (com_text, mem_id, com_pic, com_status) 
-    VALUES (?, 2, ?, 1)";
+    VALUES (?, ?, ?, 1)";
 
     // 預備語句
     $stmt = $pdo->prepare($sql);
     // 綁定參數
     $stmt->bindParam(1, $com_text);
-    // $stmt->bindParam(2, $mem_id);
-    $stmt->bindParam(2, $com_pic);
+    $stmt->bindParam(2, $mem_id);
+    $stmt->bindParam(3, $com_pic);
 
     // 執行 SQL 插入語句
     if ($stmt->execute()) {
