@@ -15,7 +15,7 @@ try {
     }
     
     // SQL 查詢
-    $sql = "SELECT * FROM news  WHERE news_status = 1";  // 修改為您的 SQL 查詢
+    $sql = "SELECT * FROM news  WHERE news_status = 1  ORDER BY news_date DESC" ;  // 修改為您的 SQL 查詢
 
     // 準備 SQL 查詢
     $news = $pdo->prepare($sql);

@@ -7,8 +7,9 @@
         if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
             // 開發環境
             //這是本地端的mySQL資料庫帳號密碼檔案
-            require_once("../api/connectPxzoo.php");
-            //允許跨域存取
+            require_once("connectPxzoo.php");
+
+                //允許跨域存取
             header("Access-Control-Allow-Origin: *"); // 允許所有來源
             header("Access-Control-Allow-Methods: POST, GET, OPTIONS,DELETE");
             header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -21,7 +22,7 @@
 
         $searchTerm = $_GET['searchTerm']; //有問題
         // SQL 查詢，模糊查詢
-        $sql = "SELECT *   FROM questions 
+        $sql = "SELECT * FROM questions 
         WHERE question_text  LIKE :searchTerm 
         OR question_option_a LIKE :searchTerm 
         OR question_option_b LIKE :searchTerm
