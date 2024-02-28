@@ -36,22 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $animal_small_pic = $_FILES["animal_small_pic"]["name"] ?? '';
       
       echo json_encode($filesInfo);
-    //--------------取得上傳檔案
-    // if ($_FILES["animal_icon"]["error"] === 0) {
-    //     $dir = "../images/animal/animal_icon/";
-    //     if (!file_exists($dir)) {
-    //         mkdir($dir);
-    //     }
-    //     $from = $_FILES["animal_icon"]["tmp_name"];
-    //     $to = $dir . $animal_icon;
-    //     if (move_uploaded_file($from, $to)) {
-    //         // 檔案成功移動
-    //     } else {
-    //         $result = ["error" => true, "msg" => "檔案移動失敗"];
-    //     }
-    // } else {
-    //     $result = ["error" => true, "msg" => "檔案上傳失敗"];
-    // }
 
     // // 將上傳的圖片移動到指定的資料夾中
     move_uploaded_file($_FILES["animal_pic_a"]["tmp_name"], "../images/animal/animal_pic/" . $_FILES["animal_pic_a"]["name"]);
@@ -93,11 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmtAnimal->bindParam(15, $animal_small_pic);
 
     $stmtAnimal->execute();
-    // if ($stmtAnimal->execute()) {
-    //     echo "新增 animal 記錄成功";
-    // } else {
-    //     echo "錯誤: " . $stmtAnimal->errorInfo()[2];
-    // }
+
 
     // 獲取新 animal_id
     $lastInsertedId = $pdo->lastInsertId();
