@@ -14,27 +14,35 @@ try {
         // 如果是在生產環境
         require_once("connect_chd104g4.php");
     }
+
+    // 從 HTTP 請求中獲取 JSON 格式的輸入數據
+    $inputJSON = file_get_contents('php://input');
+    $input = json_decode($inputJSON, TRUE); // 將 JSON 字符串轉換為 PHP 關聯數組
+
     // 從解析過後的資料中提取特定屬性值
-    $mem_id = $_POST['mem_id'];
-    $mem_pic = $_FILES["mem_pic"]["name"] ?? '';
-    move_uploaded_file($_FILES["mem_pic"]["tmp_name"], "../images/memberPic/" . $_FILES["mem_pic"]["name"]);
+    $mem_id = $input['mem_id'];
+ 
     // 準備 SQL 更新語句，請根據您的數據庫實際情況進行調整
-    $sql = "UPDATE member SET mem_pic = ? WHERE mem_id = ?";
+    $sql = "SELECT *
+    FROM coupon_detail
+    WHERE mem_id = ?;
+    ";
 
     // 預處理 SQL 語句
     $stmt = $pdo->prepare($sql);
 
     // 綁定參數到預處理語句
-    $stmt->bindParam(1, $mem_pic);
-    $stmt->bindParam(2, $mem_id);
+    $stmt->bindParam(1, $mem_id);
+
     // 執行 SQL 語句
     $stmt->execute();
 
     // 檢查更新操作是否成功
     if ($stmt->rowCount() > 0) {
-        echo json_encode(["successMsg" => "更新成功", "mem_pic"=>$mem_pic]);
+        $couponsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($couponsData);
     } else {
-        echo json_encode(["errMsg" => "更新失敗"]);
+        echo json_encode(["errMsg" => "抓取失敗"]);
     }
 } catch (PDOException $e) {
     echo json_encode(["errMsg" => "執行失敗: " . $e->getMessage()]);

@@ -15,7 +15,9 @@ try {
     if (isset($_GET['mem_id'])) {
         $mem_id = $_GET['mem_id'];
 
-        $sql = 'SELECT * FROM coupon_detail WHERE mem_id = ?;';
+        $sql = 'SELECT cd.*, c.cou_pic FROM coupon_detail cd
+        LEFT JOIN coupon c ON cd.cou_id = c.cou_id
+         WHERE cd.mem_id = ?;';
         
         $memOrder = $pdo->prepare($sql);
 
