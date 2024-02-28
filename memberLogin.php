@@ -27,7 +27,7 @@ $login_account = empty( $_GET["mem_acc"] ) ? ( $_POST["mem_acc"] ?? "" ) : $_GET
 $login_psw = empty( $_GET["mem_psw"] ) ? ( $_POST["mem_psw"] ?? "" ) : $_GET["mem_psw"];
 
 if($login_account != "" && $login_psw != "") {
-    $sql = " SELECT * FROM member WHERE mem_acc = '{$login_account}' OR mem_psw = '{$login_psw}'";
+    $sql = " SELECT * FROM member WHERE mem_acc = '{$login_account}' AND mem_psw = '{$login_psw}'";
     $result = $pdo->query($sql);
     $resArray = $result->fetch(PDO::FETCH_ASSOC);
     $mem_psw = $resArray["mem_psw"]??"";
