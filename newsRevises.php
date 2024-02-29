@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $news_id = $_POST['news_id'];
     $news_title = $_POST['news_title'];
     $news_type = $_POST['news_type'];
+    $news_typepic = $_POST['news_typepic'];
     $news_date = $_POST['news_date'];
     $news_text_1 = $_POST['news_text_1'];
     $news_text_2 = $_POST['news_text_2'];
@@ -37,16 +38,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     // 新的圖片 URL，如果有的話
-    $news_typepic = $_POST['news_typepic'] ?? '';
+    // $news_typepic = $_POST['news_typepic'] ?? '';
     $news_pic = $_POST['news_pic'] ?? '';
 
-    $new_news_typepic = $_FILES['news_typepic']["name"] ?? '';
+    // $new_news_typepic = $_FILES['news_typepic']["name"] ?? '';
     $new_news_pic = $_FILES['news_pic']["name"] ?? '';
 
     // 如果沒有上傳新圖片，則使用原始圖片名稱
-    if (empty($new_news_typepic)) {
-        $new_news_typepic = $news_typepic;
-    }
+    // if (empty($new_news_typepic)) {
+    //     $new_news_typepic = $news_typepic;
+    // }
     if (empty($new_news_pic)) {
         $new_news_pic = $news_pic;
     }
@@ -55,12 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $target_directory = '../images/news/';
 
     // 更新圖片 URL 並移動檔案
-    if (!empty($new_news_typepic)) {
-        $news_typepic = $target_directory . 'newsFrame/' . basename($new_news_typepic);
-        move_uploaded_file($_FILES["news_typepic"]["tmp_name"], $news_typepic);
-    } else {
-        $news_typepic = $news_typepic; // 使用已有的圖片名稱
-    }
+    // if (!empty($new_news_typepic)) {
+    //     $news_typepic = $target_directory . 'newsFrame/' . basename($new_news_typepic);
+    //     move_uploaded_file($_FILES["news_typepic"]["tmp_name"], $news_typepic);
+    // } else {
+    //     $news_typepic = $news_typepic; // 使用已有的圖片名稱
+    // }
     if (!empty($new_news_pic)) {
         $news_pic = $target_directory . basename($new_news_pic);
         move_uploaded_file($_FILES["news_pic"]["tmp_name"], $news_pic);
@@ -86,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // 綁定參數到預處理語句
     $stmt->bindParam(1, $news_title);
     $stmt->bindParam(2, $news_type);
-    $stmt->bindParam(3, $new_news_typepic);
+    $stmt->bindParam(3, $news_typepic);
     $stmt->bindParam(4, $news_date);
     $stmt->bindParam(5, $new_news_pic);
     $stmt->bindParam(6, $news_text_1);

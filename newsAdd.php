@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 從表單中獲取數據
     $news_title = $_POST["news_title"] ?? '';
     $news_type = $_POST["news_type"] ?? '';
-    $news_typepic = $_FILES["news_typepic"]["name"] ?? '';
+    $news_typepic = $_POST["news_typepic"] ?? '';
     $news_date = $_POST["news_date"] ?? '';
     $news_pic = $_FILES["news_pic"]["name"] ?? '';
     $news_text_1 = $_POST["news_text_1"] ?? '';
@@ -32,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $news_text_4 = $_POST["news_text_4"] ?? '';
 
     // 將上傳的圖片移動到指定的資料夾中
-    move_uploaded_file($_FILES["news_typepic"]["tmp_name"], "../images/news/newsFrame/" . $_FILES["news_typepic"]["name"]);
     move_uploaded_file($_FILES["news_pic"]["tmp_name"], "../images/news/" . $_FILES["news_pic"]["name"]);
 
     // SQL 插入語句
