@@ -18,7 +18,10 @@ try {
         $category = $_GET['category'];
         
         // 使用參數化查詢動態獲取不同館別的資料
-        $sql = "SELECT a.animal_id, a.animal_name, a.animal_vote, a.animal_small_pic, l.category_name FROM animal a JOIN location l ON a.location_name = l.location_name WHERE l.category_name = ?";
+        $sql = "SELECT a.animal_id, a.animal_name, a.animal_vote, a.animal_small_pic, l.category_name 
+        FROM animal a 
+        JOIN location l ON a.location_name = l.location_name 
+        WHERE l.category_name = ? AND a.animal_status = 1";
         
         // 預備語句
         $stmt = $pdo->prepare($sql);
