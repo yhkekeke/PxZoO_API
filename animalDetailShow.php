@@ -46,7 +46,7 @@ try {
         }
     }
     if((isset($_GET['type']) && $_GET['type'] === 'speciesname')){
-        $sql = "SELECT a.animal_species, l.category_name
+        $sql = "SELECT a.animal_species, a.animal_id, l.category_name
         FROM animal a JOIN location l ON a.location_name = l.location_name";  // 修改為您的 SQL 查詢
 
         // 準備 SQL 查詢
