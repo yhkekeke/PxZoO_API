@@ -15,18 +15,18 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1'
 
 
 try {
-
-
-        // 執行 SQL 語句
-        $sql = "SELECT animal_id ,animal_name, animal_small_pic, animal_vote
-                FROM animal
-                ORDER BY animal_vote DESC
-                LIMIT 3";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-    }catch (Exception $e) {
+    // 執行 SQL 語句
+    $sql = "SELECT animal_id, animal_name, animal_small_pic, animal_vote
+            FROM animal
+            WHERE animal_status = 1
+            ORDER BY animal_vote DESC
+            LIMIT 3";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+} catch (Exception $e) {
     echo "發生錯誤：" . $e->getMessage();
 }
+
 ?>
