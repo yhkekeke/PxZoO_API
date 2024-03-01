@@ -16,7 +16,8 @@ try {
 
     // SQL 查詢
     $sql = "SELECT c.*, m.mem_name
-            FROM comment c JOIN member m ON c.mem_id = m.mem_id";
+            FROM comment c JOIN member m ON c.mem_id = m.mem_id
+            ORDER BY c.com_date DESC";
     
     // 準備 SQL 查詢
     $comment = $pdo->prepare($sql);

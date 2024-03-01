@@ -15,7 +15,7 @@ try {
     }
 
     // SQL 查詢
-    $sql = "SELECT * FROM comment WHERE com_status = 1";
+    $sql = "SELECT * FROM comment WHERE com_status = 1 ORDER BY com_date DESC";
 
     // 準備 SQL 查詢
     $comment = $pdo->prepare($sql);
