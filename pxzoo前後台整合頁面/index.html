@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./front/images/index/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Noto+Sans+TC:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @keyframes cloud3 {
+        15% {
+          left: 15px;
+          top: 5px;
+        }
+        30% {
+          left: 25px;
+          top: -5px;
+        }
+        45% {
+          left: 35px;
+          top: 5px;
+        }
+        60% {
+          right: 25px;
+          top: -5px;
+        }
+        75% {
+          right: 15px;
+          top: 5px;
+        }
+        90% {
+          right: 5px;
+          top: -5px;
+        }
+      }
+      @keyframes cloud5 {
+        15% {
+          top: 10px;
+        }
+        30% {
+          top: 15px;
+        }
+        45% {
+          top: 20px;
+        }
+        60% {
+          top: 15px;
+        }
+        75% {
+          top: 10px;
+        }
+        90% {
+          top: 5px;
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body main {
+        max-width: 1920px;
+        width: 100%;
+        height: 100vh;
+        background-image: url("./front/images/index/frontPageBG.svg");
+        background-size: cover;
+        background-position: center 90%;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+      body main .pageLogo {
+        width: 19.6vw;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      @media (max-width:768px) {
+        body main .pageLogo{
+          width: 60vw;
+        }
+      }
+      body main .dirArea {
+        position: absolute;
+        bottom: -1%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      body main .dirArea .front {
+        font-weight: 700;
+        line-height: 150%;
+        font-family: "Montserrat", "Noto Sans TC";
+        font-size: 28px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(3.5vw,3.5vw);
+        color: #fff;
+        text-decoration: none;
+      }
+      @media (max-width:1660px) {
+        body main .dirArea .front{
+          font-size: 24px;
+        }
+      }
+      @media (max-width:1440px) {
+        body main .dirArea .front{
+          font-size: 22px;
+        }
+      }
+      @media (max-width:1280px) {
+        body main .dirArea .front{
+          font-size: 20px;
+        }
+      }
+      @media (max-width:768px) {
+        body main .dirArea .front{
+          transform: translate(10vw,10vw);
+          font-size: 30px
+        }
+      }
+      body main .dirArea .front:hover {
+        color: #fed001;
+      }
+      body main .dirArea .back {
+        font-weight: 700;
+        line-height: 150%;
+        font-family: "Montserrat", "Noto Sans TC";
+        font-size: 28px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(3.5vw,8.8vw);
+        color: #fff;
+        text-decoration: none;
+      }
+      @media (max-width:1660px) {
+        body main .dirArea .back{
+          font-size: 24px;
+        }
+      }
+      @media (max-width:1440px) {
+        body main .dirArea .back{
+          font-size: 22px;
+        }
+      }
+      @media (max-width:1280px) {
+        body main .dirArea .back{
+          font-size: 20px;
+        }
+      }
+      @media (max-width:768px) {
+        body main .dirArea .back{
+          transform: translate(10vw,28vw);
+          font-size: 30px
+        }
+      }
+      body main .dirArea .back:hover {
+        color: #fed001;
+      }
+      body main .dirArea .dirSign {
+        width: 10.41vw;
+      }
+      @media (max-width:768px) {
+        body main .dirArea .dirSign{
+          width: 35vw;
+        }
+      }
+      body main .unhappybee {
+        position: absolute;
+        width: 15vw;
+        height: 6.25vw;
+        top: 17vw;
+        right: 22vw;
+      }
+      @media (max-width:768px) {
+        body main .unhappybee{
+          width: 50vw;
+          height: 20.8vw;
+          right: 0vw;
+          top: 70vw;
+        }
+      }
+      body main .unhappybee .unhappybeeText {
+        position: absolute;
+        top: 0.52vw;
+        left: 3.385vw;
+        font-size: 14px;
+        font-family: "Montserrat", "Noto Sans TC";
+      }
+      @media (max-width:1800px) {
+        body main .unhappybee .unhappybeeText{
+          font-size: 13px;
+        }
+      }
+      @media (max-width:1600px) {
+        body main .unhappybee .unhappybeeText{
+          font-size: 12px;
+        }
+      }
+      @media (max-width:1280px) {
+        body main .unhappybee .unhappybeeText{
+          font-size: 9px;
+        }
+      }
+      @media (max-width:768px) {
+        body main .unhappybee .unhappybeeText{
+          top: 2vw;
+          left: 12vw;
+        }
+      }
+      body main .unhappybee .unhappybeeImg {
+        width: 100%;
+        height: 100%;
+      }
+      body main .cloud3 {
+        position: absolute;
+        width: 15.625vw;
+        height: 7.8125vw;
+        top: 2vw;
+        left: 2vw;
+        animation: cloud3 12s linear infinite;
+      }
+      @media (max-width:768px) {
+        body main .cloud3{
+          width:30vw;
+          height: 30vw;
+        }
+      }
+      body main .cloud5 {
+        position: absolute;
+        width: 15.625vw;
+        height: 7.8125vw;
+        right: 8vw;
+        top: 3vw;
+        animation: cloud5 12s linear infinite;
+      }
+      @media (max-width:768px) {
+        body main .cloud5{
+          width:30vw;
+          height: 30vw;
+        }
+      }
+      body main .grasses8 {
+        position: absolute;
+        width: 7.8125vw;
+        height: 3.125vw;
+        bottom: 7.5vw;
+        right: 3vw;
+      }
+      @media (max-width:768px) {
+        body main .grasses8{
+          width:20vw;
+          height: 10vw;
+          bottom: 25vw;
+        }
+      }
+      body main .grasses9 {
+        position: absolute;
+        width: 7.8125vw;
+        height: 3.645vw;
+        bottom: 7.5vw;
+        right: 15vw;
+      }
+      body main .natureTree7 {
+        position: absolute;
+        width: 10.41vw;
+        height: 15.625;
+        bottom: 7.5vw;
+        left: 0.5vw;
+      }
+      @media (max-width:768px) {
+        body main .natureTree7{
+          width: 30vw;
+          height: 40vw;
+          bottom: 25vw;
+        }
+      }
+      body main .giraffe {
+        position: absolute;
+        width: 10.416vw;
+        height: 13.02vw;
+        bottom: 7.5vw;
+        left: 13vw;
+      }
+      body main .kangaroo {
+        position: absolute;
+        width: 7.8125vw;
+        height: 7.8125vw;
+        bottom: 7.5vw;
+        right: 8vw;
+      }
+      body main .chimpanzees {
+        position: absolute;
+        width: 7.8125vw;
+        height: 7.8125vw;
+        bottom: 7vw;
+        right: 24vw;
+      }
+      body main .crab {
+        position: absolute;
+        width: 7.8125;
+        height: 5.208vw;
+        bottom: 7.6vw;
+        left: 32vw;
+      }
+      body main .copyRight {
+        width: 70%;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        color: #fff;
+        font-size: 18px;
+        font-family: "Montserrat", "Noto Sans TC";
+      }
+      @media (max-width:1800px) {
+        body main .copyRight{
+          font-size: 16px;
+        }
+      }
+      @media (max-width:1600px) {
+        body main .copyRight{
+          font-size: 14px;
+        }
+      }
+      @media (max-width:1280px) {
+        body main .copyRight{
+          font-size: 12px;
+        }
+      }
+      @media (max-width:768px) {
+        body main .copyRight{
+          width: 80%;
+          font-size: 10px;
+        }
+      }
+      @media (max-width:768px) {
+        .pc_dis_none{
+          display: none;
+        }
+      }
+    </style>
+    <title>PxZoO</title>
+  </head>
+  <body>
+    <main>
+      <img src="./front/images/index/logo.svg" alt="pageLogo" class="pageLogo" />
+      <div class="dirArea">
+        <a href="https://tibamef2e.com/chd104/g4/front" class="front">前台</a>
+        <a href="https://tibamef2e.com/chd104/g4/admin" class="back">後台</a>
+        <img src="./front/images/index/Group 1560.svg" alt="" class="dirSign" />
+      </div>
+      <div class="unhappybee">
+        <p class="unhappybeeText">為什麼進度這麼趕?</p>
+        <img
+          src="./front/images/index/vetor_animal_unhappybee.svg"
+          alt="unhappybee "
+          class="unhappybeeImg"
+        />
+      </div>
+
+      <img src="./front/images/index/nature_cloud_3.svg" alt="cloud3" class="cloud3" />
+      
+      <img src="./front/images/index/nature_cloud_5.svg" alt="cloud5" class="cloud5" />
+
+      <img
+        src="./front/images/index/nature_grasses_8.svg"
+        alt="grasses8"
+        class="grasses8"
+      />
+      <img
+        src="./front/images/index/nature_grasses_9.svg"
+        alt="grasses9"
+        class="grasses9 pc_dis_none"
+      />
+      <img
+        src="./front/images/index/nature_tree_7.svg"
+        alt="natureTree7"
+        class="natureTree7"
+      />
+      <img
+        src="./front/images/index/vetor_animal_giraffe.svg"
+        alt="giraffe"
+        class="giraffe pc_dis_none"
+      />
+      <img
+        src="./front/images/index/vetor_animal_kangaroo.svg"
+        alt="kangaroo"
+        class="kangaroo pc_dis_none"
+      />
+      <img
+        src="./front/images/index/vetor_animal_chimpanzees.svg"
+        alt="chimpanzees"
+        class="chimpanzees pc_dis_none"
+      />
+      <img src="./front/images/index/vetor_animal_crab.svg" alt="crab" class="crab pc_dis_none" />
+      <p class="copyRight">
+        本網站為緯育TibaMe_前端設計工程師班第88期學員專題成果作品，本平台僅供學習、展示之用。若有抵觸有關著作權或有第三人主張侵害智慧財產權等情事，均由學員負法律上責任，緯育公司概不負責。若有侵權疑慮，您可以私訊[緯育TibaMe]，後續會由專人協助處理。
+      </p>
+    </main>
+  </body>
+</html>
